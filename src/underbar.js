@@ -38,6 +38,15 @@
   // Like first, but for the last elements. If n is undefined, return just the
   // last element.
   _.last = function(array, n) {
+    if (n > array.length){
+        return array;
+    }
+  
+  if (n === 0){
+        return [];
+    }  else {
+      return n === undefined ? array[array.length-1] : array.slice(array.length-n, array.length);
+    }
   };
 
   // Call iterator(value, key, collection) for each element of collection.
@@ -46,7 +55,19 @@
   // Note: _.each does not have a return value, but rather simply runs the
   // iterator function over each item in the input collection.
   _.each = function(collection, iterator) {
+      if (Array.isArray(collection)){
+          for (var i = 0; i < collection.length; i++){
+          iterator(collection[i], i, collection);//, i, collection);
+          }
+      } else {
+          for (var i in collection){
+              iterator(collection[i], i, collection);
+          }
+      }
+      
   };
+    
+    
 
   // Returns the index at which value can be found in the array, or -1 if value
   // is not present in the array.
@@ -67,16 +88,46 @@
 
   // Return all elements of an array that pass a truth test.
   _.filter = function(collection, test) {
-  };
+      var results = [];
+      
+      _.each(collection, function(i) {
+        if (test(i)){
+            results.push(i);        
+        }
+      });
+      return results;
+    }
 
   // Return all elements of an array that don't pass a truth test.
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
+      
+      var results = [];
+
+    _.each(collection, function(i){
+      if(!test(i)){
+        results.push(i);
+      }
+    });
+    return results;
+    
+      
   };
 
   // Produce a duplicate-free version of the array.
-  _.uniq = function(array, isSorted, iterator) {
+  _.uniq = function(collection) {
+      
+      var result = [];
+      
+      _.each(collection, function(x){
+         if(_.indexOf(result, x) === -1){
+             result.push(x);
+         } 
+      });
+      return result;
+      
+      //if there are duplicates in the original array then it shouldn't get added to the result array
   };
 
 
@@ -85,6 +136,13 @@
     // map() is a useful primitive iteration function that works a lot
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
+      
+      var results = [];
+      
+    _.each(collection, function(item, index, collection) {
+      results.push(iterator(item, index, collection));
+    });
+      return results;
   };
 
   /*
@@ -126,7 +184,59 @@
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
   _.reduce = function(collection, iterator, accumulator) {
+      
+     
+      //each function
+      //letters is the orig array, 
+        //letter is the current value
+            //index is the index
+      
+//      _.each(letters, function(letter, index, collection) {
+//          iterations.push([letter, index, collection]);
+//        });
+//      
+      //reduce(accumulator, curVal)
+//      
+      
+      
+       //invoke the each function with collection(array passed in through the reduce call)
+        // and the function args for reduce (val, index, accumulator)
+            //reduce iterates through the array and adds the value to the accumulator
+      
+      
+      
+      
+    _.each(collection, function(x){
+        if (accumulator === undefined){
+            accumulator = x;
+            iterator();
+        } else {
+            accumulator = iterator(accumulator, x);
+        }
+    });
+      return accumulator;
   };
+      
+      
+//      function() {
+//        var memoInCallback, itemInCallback;
+//
+//        _.reduce(['item'], function(memo, item) {
+//          memoInCallback = memo;
+//          itemInCallback = item;
+//        }, 'memo');
+//
+//        expect(memoInCallback).to.equal('memo');
+//        expect(itemInCallback).to.equal('item');
+//      });
+
+      
+      
+      //_.each(collection, function(val, key, collection) {
+//        accumulator = iterator(val, key)
+//    });
+//      return accumulator;
+ //};
 
   // Determine if the array or object contains a given value (using `===`).
   _.contains = function(collection, target) {

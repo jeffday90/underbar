@@ -217,26 +217,6 @@
       return accumulator;
   };
       
-      
-//      function() {
-//        var memoInCallback, itemInCallback;
-//
-//        _.reduce(['item'], function(memo, item) {
-//          memoInCallback = memo;
-//          itemInCallback = item;
-//        }, 'memo');
-//
-//        expect(memoInCallback).to.equal('memo');
-//        expect(itemInCallback).to.equal('item');
-//      });
-
-      
-      
-      //_.each(collection, function(val, key, collection) {
-//        accumulator = iterator(val, key)
-//    });
-//      return accumulator;
- //};
 
   // Determine if the array or object contains a given value (using `===`).
   _.contains = function(collection, target) {

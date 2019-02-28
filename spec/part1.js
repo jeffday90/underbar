@@ -346,6 +346,8 @@
         var iterator = function(value) { return value === 1; };
         var numbers = [1, 2, 2, 3, 4, 4];
 
+          //the numbers below was 'fill me in' in the master, so i added numbers to 
+          //allow for the ability to test
         expect(_.uniq(numbers)).to.eql([1, 2]);
       });
 

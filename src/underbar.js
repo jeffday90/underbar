@@ -49,7 +49,7 @@
   _.each = function(collection, iterator) {
       if (Array.isArray(collection)){
           for (var i = 0; i < collection.length; i++){
-          iterator(collection[i], i, collection);//, i, collection);
+          iterator(collection[i], i, collection);
           }
       } else {
           for (var i in collection){
@@ -176,27 +176,6 @@
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
   _.reduce = function(collection, iterator, accumulator) {
-      
-     
-      //each function
-      //letters is the orig array, 
-        //letter is the current value
-            //index is the index
-      
-//      _.each(letters, function(letter, index, collection) {
-//          iterations.push([letter, index, collection]);
-//        });
-//      
-      //reduce(accumulator, curVal)
-//      
-      
-      
-       //invoke the each function with collection(array passed in through the reduce call)
-        // and the function args for reduce (val, index, accumulator)
-            //reduce iterates through the array and adds the value to the accumulator
-      
-      
-      
       
     _.each(collection, function(x){
         if (accumulator === undefined){

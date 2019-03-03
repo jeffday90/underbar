@@ -348,7 +348,7 @@
 
           //the numbers below was 'fill me in' in the master, so i added numbers to 
           //allow for the ability to test
-        expect(_.uniq(numbers)).to.eql([1, 2]);
+        expect(_.uniq(numbers, true, iterator)).to.eql([1, 2]);
       });
 
       it('should produce a brand new array instead of modifying the input array', function() {

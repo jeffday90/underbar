@@ -108,18 +108,28 @@
   };
 
   // Produce a duplicate-free version of the array.
-  _.uniq = function(collection) {
+  _.uniq = function(collection, isSorted, iterator) {
       
       var result = [];
       
-      _.each(collection, function(x){
-         if(_.indexOf(result, x) === -1){
-             result.push(x);
+      if (isSorted){
+        var boolArr = collection.map(iterator);
+        var output = [];
+          _.each(boolArr, function(val, key){
+                if(!output.includes(val)){
+                output.push(val);
+                result.push(collection[key]);
          } 
-      });
+      })    
+          
+      } else {
+        _.each(collection, function(x){
+            if(!result.includes(x)){
+                result.push(x);
+            } 
+        });
+      }
       return result;
-      
-      //if there are duplicates in the original array then it shouldn't get added to the result array
   };
 
 

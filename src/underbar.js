@@ -224,12 +224,17 @@
         return Boolean(iterator(item));
     }, true);
 };
-
+//every determines whether a collection is all truthy or all falsy
+    //if i return the opposite of that for some then it will work the same
   // Determine whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
   _.some = function(collection, iterator) {
-    // TIP: There's a very clever way to re-use every() here.
-  };
+    // TIP: There's a very clever way to re-use every() here. 
+      iterator = iterator || _.identity;
+      return !_.every(collection, function(x){
+          return !iterator(x);
+      });
+};
 
 
   /**
